@@ -4,8 +4,17 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
   try {
-    const response = await Crafting_components.find()
-    res.json(response)
+    const crafting_components = await Crafting_components.find()
+    res.json(crafting_components)
+  } catch (err) {
+    res.status(500).json({ msg: err })
+  }
+})
+
+router.get('/:id', async (req, res) => {
+  try {
+    const crafting_component = await Crafting_components.findById(req.params.id)
+    res.json(crafting_component)
   } catch (err) {
     res.status(500).json({ msg: err })
   }
@@ -29,6 +38,15 @@ router.post('/', async (req, res) => {
 
     const response = await component.save()
     res.status(200).json(response)
+  } catch (err) {
+    res.status(500).json({ msg: err })
+  }
+})
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const response = await Crafting_components.deleteOne({ _id: req.params.id })
+    res.status(401).json(response)
   } catch (err) {
     res.status(500).json({ msg: err })
   }

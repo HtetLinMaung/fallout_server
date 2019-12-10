@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use('/api/crafting_components', require('./routes/crafting_components'))
-
-
+app.use('/api/junks', require('./routes/junks'))
+app.use('/api/crafting_junks', require('./routes/crafting_junks'))
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

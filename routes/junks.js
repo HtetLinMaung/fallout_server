@@ -13,6 +13,15 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/:id', async (req, res) => {
+  try {
+    const junk = await Junks.findById(req.params.id)
+    res.json(junk)
+  } catch (err) {
+    res.status(500).json({ msg: err })
+  }
+})
+
 router.post('/', async (req, res) => {
   try {
     for (const [key, value] of Object.entries(req.body)) {
@@ -39,7 +48,7 @@ router.post('/', async (req, res) => {
       const transition_res = await component.save()
     }
 
-    res.status(200).json({ ...junk_res, ...transition_res })
+    res.status(200).json(junk)
   } catch (err) {
     res.status(500).json({ msg: err })
   }
